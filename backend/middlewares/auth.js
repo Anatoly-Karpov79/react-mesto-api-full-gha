@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
   const { authorization } = req.cookies;
 
   if (!authorization) {
-    next(new AuthError('Необходимо авторизоваться'));
+    next(new AuthError('Необходимо срочно авторизоваться'));
     return;
   }
 
