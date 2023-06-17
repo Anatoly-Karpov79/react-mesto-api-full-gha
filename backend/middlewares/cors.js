@@ -1,6 +1,6 @@
 const allowedCors = [
-  'http://domainname.karpov.mesto.nomoredomains.rocks',
-  'https://domainname.karpov.mesto.nomoredomains.rocks',
+  'http://akarpov.mesto.nomoredomains.rocks',
+  'https://akarpov.mesto.nomoredomains.rocks',
   'http://localhost:3000',
   'https://localhost:3000',
 ];

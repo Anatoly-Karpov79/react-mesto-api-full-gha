@@ -7,12 +7,14 @@ const routerCards = require('./routes/cards');
 const routerUsers = require('./routes/users');
 const NotFoundError = require('./errors/notfounderror');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const cors = require('./middlewares/cors');
 
 const { PORT = 3000 } = process.env;
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(cors);
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
   useNewUrlParser: true,
