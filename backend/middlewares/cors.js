@@ -1,8 +1,8 @@
 const allowedCors = [
-  'http://akarpov.mesto.nomoredomains.rocks',
-  'https://akarpov.mesto.nomoredomains.rocks',
-  'http://localhost:3000',
-  'https://localhost:3000',
+ // 'http://akarpov.mesto.nomoredomains.rocks',
+ // 'https://akarpov.mesto.nomoredomains.rocks',
+ // 'http://localhost:3000',
+ // 'https://localhost:3000',
 ];
 
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';

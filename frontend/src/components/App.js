@@ -218,7 +218,7 @@ function App() {
           image: success,
           text: "Вы успешно зарегистрировались",
         });
-        setTimeout(navigate, 3000, "/sign-in");
+        setTimeout(navigate, 3000, "/signin");
         setEmail(email);
       })
       .catch((err) => {
@@ -232,7 +232,7 @@ function App() {
 
   function signOut() {
     localStorage.removeItem("jwt");
-    navigate("/sign-up");
+    navigate("/signup");
     setLoggedIn(false);
   }
 
