@@ -36,6 +36,7 @@ function App() {
   const [checkToken, setCheckToken] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [info, setInfo] = useState({ image: "", text: "" });
+  
 
   useEffect(() => {
     if (loggedIn) {

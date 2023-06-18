@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
 
   const token = authorization.replace('Bearer ', '');
   let payload;
-
+  console.log(token);
   try {
     payload = jwt.verify(token, 'super-strong-secret');
   } catch (err) {

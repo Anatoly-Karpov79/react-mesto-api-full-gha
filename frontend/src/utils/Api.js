@@ -1,7 +1,8 @@
  class Api {
-  constructor({headers, baseUrl}) {
+  constructor({headers, baseUrl, token}) {
     this._headers = headers
     this._baseUrl = baseUrl
+    this._token = token
   }
     _handleResponse = (res) => {
         if (res.ok) {
@@ -10,11 +11,12 @@
         // если ошибка, отклоняем промис
         return Promise.reject(`Ошибка: ${res.status}`);
       };
-  
+      
 
   getUserInfo() {
     return fetch(this._baseUrl + `/users/me`, { 
       method: "GET",
+      authorization: this._token,
     headers: this._headers,
     }).then(this._handleResponse);
   }
@@ -29,17 +31,20 @@
    return fetch(this._baseUrl + `/users/me`, {
       method: "PATCH",
       headers: this._headers,
+      authorization: this._token,
       body: JSON.stringify({
         name: `${name}`,
         about: `${about}`,
       } ), 
     }) 
     .then(this._handleResponse);
+    
   }
 
   addCard(data) {
    return fetch(this._baseUrl + `/cards`, {
       method: "POST",
+      authorization: this._token,
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
@@ -51,6 +56,7 @@
   setLike(_id) {
     return fetch(this._baseUrl + `/cards/` + _id + `/likes`, {
       method: "PUT",
+      authorization: this._token,
       headers: this._headers,
     }).then(this._handleResponse);
   }
@@ -58,6 +64,7 @@
    removeLike(_id) {
     return fetch(this._baseUrl + `/cards/` + _id + `/likes/`, {
       method: 'DELETE',
+      authorization: this._token,
       headers: this._headers,
     })
     .then(this._handleResponse)
@@ -66,6 +73,7 @@
   changeAvatar({data}) {
     return  fetch(this._baseUrl + `/users/me/avatar`, {
       method: 'PATCH',
+      authorization: this._token,
       headers: this._headers,
       body: JSON.stringify( {avatar: data} )
     })
@@ -75,6 +83,7 @@
   deleteCard(_cardId) {
     return fetch(this._baseUrl + `/cards/` + _cardId, {
         method: "DELETE",
+        authorization: this._token,
         headers: this._headers,
     }).then(this._handleResponse);
   
@@ -83,9 +92,14 @@
 }
 
 export const api = new Api({
-  baseUrl: `https://mesto.nomoreparties.co/v1/cohort-54`,
+      
+  baseUrl: `https://karpov.mesto.nomoredomains.rocks`,
+  token: `Bearer ${localStorage.getItem('token')}`,
   headers: {
-    authorization: "234760c4-c169-4c5e-95d9-4ebca7efc3f0",
-    "Content-Type": "application/json",
+    credentials: "include",
+      Accept: "application/json",
+      
+       
   },
+  
 });
