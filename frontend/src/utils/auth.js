@@ -33,8 +33,8 @@ export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
+      credentials: "include",
       Accept: 'application/json',
-      
       Authorization: `Bearer ${token}`,
     },
   }).then((res) => checkResponse(res));

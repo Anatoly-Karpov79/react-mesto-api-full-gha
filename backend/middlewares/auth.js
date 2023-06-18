@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const AuthError = require('../errors/autherror');
 
 module.exports = (req, res, next) => {
-  const { authorization } = req.cookies;
+  const { authorization } = req.headers;
 
   if (!authorization) {
     next(new AuthError('Необходимо срочно авторизоваться'));
