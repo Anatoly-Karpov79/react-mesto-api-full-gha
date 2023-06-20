@@ -5,7 +5,7 @@ const AuthError = require('../errors/autherror');
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports = (req, res, next) => {
-  const token = req.cookies.jwt;
+  const token = req.cookies;
 
   if (!token) {
     next(new AuthError('Необходимо срочно авторизоваться'));
@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
   let payload;
 
   try {
-    payload = jwt.verify(token, NODE_ENV !== 'production' ? JWT_SECRET : 'dev-secret');
+    payload = token.verify(token, NODE_ENV !== 'production' ? JWT_SECRET : 'dev-secret');
   } catch (err) {
     next(new AuthError('Необходимо авторизоваться'));
     return;
