@@ -97,8 +97,10 @@ export const api = new Api({
   baseUrl: `http://karpov.mesto.nomoredomains.rocks`,
   
   headers: {
+    
     credentials: "include",
       Accept: "application/json",
+      Authorization: `Bearer ${localStorage.getItem('jwt')}`
       
        
   },

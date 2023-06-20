@@ -61,18 +61,20 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = `Bearer ${localStorage.getItem('jwt')}`;
     if (jwt) {
       setCheckToken(true);
       auth
         .getContent(jwt)
         .then((res) => {
           setLoggedIn(true);
+          
           navigate("/", { replace: true });
           setEmail(res.data.email);
         })
         .catch((err) => {
           console.log(err);
+          console.log("efwefwfweffe")
         });
     }
   }, [navigate]);
