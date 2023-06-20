@@ -99,7 +99,7 @@ export const api = new Api({
   headers: {
     credentials: "include",
       Accept: "application/json",
-      authorization: `Bearer ${localStorage.getItem('token')}`,
+      
        
   },
   
