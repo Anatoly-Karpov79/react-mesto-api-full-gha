@@ -64,8 +64,8 @@ function App() {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       setCheckToken(true);
+      console.log(jwt)
       auth
-      //  .checkToken(jwt)
         .getContent(jwt)
         .then((res) => {
           setLoggedIn(true);
@@ -199,14 +199,18 @@ function App() {
   function handleLogin(password, email) {
     auth
       .authorize(email, password)
+      
       .then((res) => {
-        if (res.token) {
+        
+        
           setLoggedIn(true);
+          
         localStorage.setItem('jwt', res.token);
+        console.log(res)
         navigate("/", { replace: true });
         }
         
-      })
+      )
       .catch((err) => {
         setShowTooltip(true);
         chooseInfoTooltip({
