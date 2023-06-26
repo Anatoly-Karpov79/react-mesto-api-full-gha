@@ -61,14 +61,15 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    const jwt = `Bearer ${localStorage.getItem('jwt')}`;
+    const jwt = localStorage.getItem('jwt');
     if (jwt) {
       setCheckToken(true);
       auth
+      //  .checkToken(jwt)
         .getContent(jwt)
         .then((res) => {
           setLoggedIn(true);
-          
+        //  setCurrentUser(res);
           navigate("/", { replace: true });
           setEmail(res.data.email);
         })
@@ -199,9 +200,12 @@ function App() {
     auth
       .authorize(email, password)
       .then((res) => {
-        setLoggedIn(true);
-        localStorage.setItem("jwt", res.token);
+        if (res.token) {
+          setLoggedIn(true);
+        localStorage.setItem('jwt', res.token);
         navigate("/", { replace: true });
+        }
+        
       })
       .catch((err) => {
         setShowTooltip(true);
@@ -247,12 +251,12 @@ function App() {
       <Routes>
         <Route
           exact
-          path="/sign-up"
+          path="/signup"
           element={<Register onRegister={handleRegister} />}
         />
         <Route
           exact
-          path="/sign-in"
+          path="/signin"
           element={<Login onLogin={handleLogin} />}
         />
 
@@ -260,7 +264,7 @@ function App() {
           exact
           path="/"
           element={
-            <ProtectedRoute loggedIn={loggedIn} checkToken={checkToken}>
+            <ProtectedRoute loggedIn={loggedIn} checkToken={checkToken} >
               <Main
                 component={Main}
                 onEditAvatar={handleEditAvatarClick}
@@ -308,7 +312,7 @@ function App() {
 
         <Route
          exact path="/*"
-          element={loggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />}
+          element={loggedIn ? <Navigate to="/" /> : <Navigate to="/signin" />}
         />
       </Routes>
 
