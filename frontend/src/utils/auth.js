@@ -34,9 +34,8 @@ export const getContent = (jwt) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
-      credentials: "include",
-      Accept: 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('jwt')}`
+      'Authorization' : `Bearer eyJhbGciOiJIUzI1NiJ9.e30.Sel2Ydp2Uy8fP5GSkzU581n8JKZTLQZUKlvgQSHmul4`,
+      'Content-Type': 'application/json'
     },
   }).then((res) => checkResponse(res));
 };

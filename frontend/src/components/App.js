@@ -62,12 +62,16 @@ function App() {
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
+    
     if (jwt) {
+      
       setCheckToken(true);
-      console.log(jwt)
+      
       auth
         .getContent(jwt)
+        
         .then((res) => {
+console.log("content");
           setLoggedIn(true);
           setCurrentUser(res);
           navigate("/", { replace: true });
@@ -201,13 +205,14 @@ function App() {
       .authorize(email, password)
       
       .then((res) => {
-        
-        
-          setLoggedIn(true);
-          
+        if(res.token){
+        setLoggedIn(true);
         localStorage.setItem('jwt', res.token);
-        console.log(res)
+        console.log('Вошли'," Токен ", res.token)
         navigate("/", { replace: true });
+        }
+                      
+        
         }
         
       )
