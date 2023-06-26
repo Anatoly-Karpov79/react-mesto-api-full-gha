@@ -3,8 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 function NavBar({ loggedIn, email, signOut }) {
   const { pathname } = useLocation();
 
-  const textBar = pathname === `${"/sign-in"}` ? "Регистрация" : "Войти";
-  const linkRoute = `${pathname === "/sign-in" ? "/sign-up" : "/sign-in"}`;
+  const textBar = pathname === `${"/signin"}` ? "Регистрация" : "Войти";
+  const linkRoute = `${pathname === "/signin" ? "/signup" : "/signin"}`;
 
   return (
     <nav className="navBar__container">

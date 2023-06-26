@@ -69,7 +69,7 @@ function App() {
         .getContent(jwt)
         .then((res) => {
           setLoggedIn(true);
-        //  setCurrentUser(res);
+          setCurrentUser(res);
           navigate("/", { replace: true });
           setEmail(res.data.email);
         })
@@ -225,7 +225,7 @@ function App() {
           image: success,
           text: "Вы успешно зарегистрировались",
         });
-        setTimeout(navigate, 3000, "/signin");
+        setTimeout(navigate, 3000, "/sign-in");
         setEmail(email);
       })
       .catch((err) => {
@@ -239,7 +239,7 @@ function App() {
 
   function signOut() {
     localStorage.removeItem("jwt");
-    navigate("/signup");
+    navigate("/sign-up");
     setLoggedIn(false);
   }
 
@@ -251,12 +251,12 @@ function App() {
       <Routes>
         <Route
           exact
-          path="/signup"
+          path="/sign-up"
           element={<Register onRegister={handleRegister} />}
         />
         <Route
           exact
-          path="/signin"
+          path="/sign-in"
           element={<Login onLogin={handleLogin} />}
         />
 
@@ -312,7 +312,7 @@ function App() {
 
         <Route
          exact path="/*"
-          element={loggedIn ? <Navigate to="/" /> : <Navigate to="/signin" />}
+          element={loggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />}
         />
       </Routes>
 
