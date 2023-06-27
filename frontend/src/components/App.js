@@ -66,12 +66,12 @@ function App() {
     if (jwt) {
       
       setCheckToken(true);
-      
+      console.log("content");
       auth
         .getContent(jwt)
         
         .then((res) => {
-console.log("content");
+          console.log(res)
           setLoggedIn(true);
           setCurrentUser(res);
           navigate("/", { replace: true });

@@ -5,22 +5,23 @@ const AuthError = require('../errors/autherror');
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports = (req, res, next) => {
-  if (!req.cookies) {
+  const { authorization } = req.headers;
+  if (!authorization || !authorization.startsWith('Bearer ')) {
     next(new AuthError('Необходимо срочно авторизоваться'));
-    return;
+  } else {
+    const token = authorization.replace('Bearer ', '');
+
+    let payload;
+
+    try {
+      payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
+    } catch (err) {
+      next(new AuthError('Необходимо авторизоваться'));
+      return;
+    }
+
+    req.user = payload;
+
+    next();
   }
-  const token = req.cookies.jwt;
-  let payload;
-
-  try {
-    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
-  } catch (err) {
-    next(new AuthError('Необходимо авторизоваться'));
-    return;
-  }
-
-  req.user = payload;
-
-  next();
 };
-// +

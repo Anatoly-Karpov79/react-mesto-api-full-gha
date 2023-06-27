@@ -30,23 +30,27 @@ export const authorize = (email, password) => {
   
 };
 
-export const getContent = (jwt) => {
+export const getContent = () => {
+  
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
+    
     headers: {
-      'Authorization' : `Bearer eyJhbGciOiJIUzI1NiJ9.e30.Sel2Ydp2Uy8fP5GSkzU581n8JKZTLQZUKlvgQSHmul4`,
-      'Content-Type': 'application/json'
+credentials: "include",
+      'Authorization' : `Bearer ${localStorage.getItem('jwt')}`,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': true,
     },
   }).then((res) => checkResponse(res));
 };
 
-export const checkToken = (token) => {
-  return fetch(`${BASE_URL}/users/me`, {
-    method: "GET",
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-      'Authorization': `Bearer ${token}`,
-    },
-  }).then(checkResponse);
-};
+//export const checkToken = (token) => {
+ // return fetch(`${BASE_URL}/users/me`, {
+ //   method: "GET",
+ //   headers: {
+ //     "Accept": "application/json",
+ //     "Content-Type": "application/json",
+ //     'Authorization': `Bearer ${token}`,
+ //   },
+ // }).then(checkResponse);
+//};
