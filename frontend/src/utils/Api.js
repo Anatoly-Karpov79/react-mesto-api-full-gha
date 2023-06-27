@@ -99,9 +99,9 @@ export const api = new Api({
   headers: {
     
     credentials: "include",
-      Accept: "application/json",
-      Authorization: `Bearer ${localStorage.getItem('jwt')}`
-      
+      'Authorization' : `Bearer ${localStorage.getItem('jwt')}`,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': true,
        
   },
   

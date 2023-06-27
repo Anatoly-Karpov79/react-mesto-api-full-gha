@@ -66,9 +66,8 @@ function App() {
     if (jwt) {
       
       setCheckToken(true);
-      console.log("content");
       auth
-        .getContent(jwt)
+        .getContent()
         
         .then((res) => {
           console.log(res)
@@ -161,6 +160,7 @@ function App() {
       .changeProfile(name, about)
       .then((res) => {
         setCurrentUser(res);
+        console.log(res);
         closeAllPopups();
       })
       .catch((err) => {
@@ -208,7 +208,6 @@ function App() {
         if(res.token){
         setLoggedIn(true);
         localStorage.setItem('jwt', res.token);
-        console.log('Вошли'," Токен ", res.token)
         navigate("/", { replace: true });
         }
                       
