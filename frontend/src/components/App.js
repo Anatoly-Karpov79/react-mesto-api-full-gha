@@ -159,8 +159,9 @@ function App() {
     api
       .changeProfile(name, about)
       .then((res) => {
-        setCurrentUser(res);
         console.log(res);
+        setCurrentUser(res);
+        
         closeAllPopups();
       })
       .catch((err) => {
@@ -186,6 +187,7 @@ function App() {
     setIsLoading(true);
     api
       .addCard(data)
+      
       .then((res) => {
         setCards([res, ...cards]);
         closeAllPopups();

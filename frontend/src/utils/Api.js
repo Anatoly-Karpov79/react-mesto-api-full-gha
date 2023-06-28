@@ -52,6 +52,7 @@
         link: data.link,
       }),
     }).then(this._handleResponse);
+    
   }
 
   setLike(_id) {
