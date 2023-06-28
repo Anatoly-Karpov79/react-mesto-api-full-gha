@@ -126,7 +126,7 @@ module.exports.login = (req, res, next) => {
           httpOnly: true,
           sameSite: 'None',
           secure: true,
-        }).send({ message: 'Успешная авторизация' }).send({ token });
+        }).send({ token });
       console.log(user);
     })
     .catch(next);

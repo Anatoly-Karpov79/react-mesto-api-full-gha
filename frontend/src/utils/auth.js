@@ -8,7 +8,7 @@ export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
-      credentials: "include",
+      
       Accept: "application/json",
       "Content-Type": "application/json",
     }, 
@@ -19,7 +19,7 @@ export const register = (email, password) => {
 export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
-    credentials: "include",
+    
     headers: {
       
       Accept: "application/json",
@@ -36,10 +36,10 @@ export const getContent = () => {
     method: "GET",
     
     headers: {
-credentials: "include",
-      'Authorization' : `Bearer ${localStorage.getItem('jwt')}`,
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials': true,
+
+   //   'Authorization' : `Bearer ${localStorage.getItem('jwt')}`,
+   //   'Content-Type': 'application/json',
+  //    'Access-Control-Allow-Credentials': true,
     },
   }).then((res) => checkResponse(res));
 };

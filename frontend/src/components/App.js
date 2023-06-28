@@ -203,11 +203,15 @@ function App() {
   }
 
   function handleLogin(password, email) {
+    console.log("нажали кнопку")
     auth
       .authorize(email, password)
       
       .then((res) => {
+        console.log("Прошли авторизацию")
+        console.log(res)
         if(res.token){
+          
         setLoggedIn(true);
         localStorage.setItem('jwt', res.token);
         navigate("/", { replace: true });

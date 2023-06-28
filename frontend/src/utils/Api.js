@@ -31,6 +31,7 @@
   changeProfile({name, about}) {
    return fetch(this._baseUrl + `/users/me`, {
       method: "PATCH",
+      
       headers: this._headers,
       
       body: JSON.stringify({
@@ -99,10 +100,10 @@ export const api = new Api({
   
   headers: {
     
-    credentials: "include",
+    
       'Authorization' : `Bearer ${localStorage.getItem('jwt')}`,
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials': true,
+      
        
   },
   
