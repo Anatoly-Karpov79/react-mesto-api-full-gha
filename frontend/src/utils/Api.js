@@ -16,14 +16,14 @@
   getUserInfo() {
     return fetch(this._baseUrl + `/users/me`, { 
       method: "GET",
-      
+      credentials: 'include',
     headers: this._headers,
     }).then(this._handleResponse);
   }
 
   getInitialCards() {
     return fetch(this._baseUrl + "/cards", {
-      
+      credentials: 'include',
       headers: this._headers,
     }).then(this._handleResponse);
   }
@@ -46,7 +46,7 @@
   addCard(data) {
    return fetch(this._baseUrl + `/cards`, {
       method: "POST",
-      
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
@@ -57,9 +57,9 @@
   }
 
   setLike(_id) {
-    return fetch(this._baseUrl + `/cards/` + _id + `/likes`, {
+    return fetch(this._baseUrl + `/cards/` + _id + `/likes/`, {
       method: "PUT",
-      
+      credentials: 'include',
       headers: this._headers,
     }).then(this._handleResponse);
   }
@@ -67,7 +67,7 @@
    removeLike(_id) {
     return fetch(this._baseUrl + `/cards/` + _id + `/likes/`, {
       method: 'DELETE',
-      
+      credentials: 'include',
       headers: this._headers,
     })
     .then(this._handleResponse)
@@ -76,7 +76,7 @@
   changeAvatar({data}) {
     return  fetch(this._baseUrl + `/users/me/avatar`, {
       method: 'PATCH',
-      
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify( {avatar: data} )
     })
@@ -86,7 +86,7 @@
   deleteCard(_cardId) {
     return fetch(this._baseUrl + `/cards/` + _cardId, {
         method: "DELETE",
-        
+        credentials: 'include',
         headers: this._headers,
     }).then(this._handleResponse);
   

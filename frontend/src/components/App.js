@@ -24,7 +24,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState();
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] =
@@ -44,6 +44,7 @@ function App() {
         .getUserInfo()
         .then((profileInfo) => {
           setCurrentUser(profileInfo);
+          console.log(profileInfo);
         })
         .catch((err) => {
           console.log(err);
@@ -70,10 +71,10 @@ function App() {
         .getContent()
         
         .then((res) => {
-          console.log(res)
           setLoggedIn(true);
           setCurrentUser(res);
           navigate("/", { replace: true });
+          console.log(res.data.email)
           setEmail(res.data.email);
         })
         .catch((err) => {
@@ -90,7 +91,9 @@ function App() {
     if (isLiked === false)
       api
         .setLike(card._id, !isLiked)
+        
         .then((newCard) => {
+          console.log(card._id);
           setCards((state) =>
             state.map((c) => (c._id === card._id ? newCard : c))
           );
@@ -142,6 +145,8 @@ function App() {
 
   function handleCardClick(card) {
     setSelectedCard(card);
+    console.log(card);
+    console.log(currentUser);
   }
 
   function closeAllPopups() {
