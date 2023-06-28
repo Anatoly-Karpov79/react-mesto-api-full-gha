@@ -18,9 +18,8 @@ module.exports = (req, res, next) => {
 
   try {
     payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
-    res.status(STATUS_OK).cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true, SameSite: false, Secure })
-      .send({ message: 'Успешная авторизация' });
-      //.send({ token })
+    res.status(STATUS_OK).send({ message: 'Успешная авторизация' });
+    // .send({ token })
   } catch (err) {
     next(new AuthError('Необходимо авторизоваться'));
     return;

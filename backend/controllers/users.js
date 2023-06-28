@@ -120,7 +120,13 @@ module.exports.login = (req, res, next) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
-      res.status(STATUS_OK).send({ token }).send({ message: 'Успешная авторизация' });
+      res.status(STATUS_OK)
+        .cookie('jwt', token, {
+          maxAge: 3600000,
+          httpOnly: true,
+          sameSite: 'None',
+          secure: true,
+        }).send({ message: 'Успешная авторизация' }).send({ token });
       console.log(user);
     })
     .catch(next);
