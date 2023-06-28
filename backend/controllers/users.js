@@ -127,7 +127,6 @@ module.exports.login = (req, res, next) => {
           sameSite: 'None',
           secure: true,
         }).send({ token });
-      console.log(user);
     })
     .catch(next);
 };

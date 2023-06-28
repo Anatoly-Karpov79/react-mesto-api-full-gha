@@ -86,7 +86,8 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i._id === currentUser.data._id);
+    console.log('Текущий пользователь', currentUser.data._id)
 
     if (isLiked === false)
       api
@@ -95,7 +96,7 @@ function App() {
         .then((newCard) => {
           console.log(card._id);
           setCards((state) =>
-            state.map((c) => (c._id === card._id ? newCard : c))
+            state.map((i) => (i._id === card._id ? newCard : i))
           );
         })
         .catch((err) => {
@@ -105,8 +106,9 @@ function App() {
       api
         .removeLike(card._id, !isLiked)
         .then((newCard) => {
+          console.log("Удалить лайк",card._id);
           setCards((state) =>
-            state.map((c) => (c._id === card._id ? newCard : c))
+            state.map((i) => (i._id === card._id ? newCard : -i))
           );
         })
         .catch((err) => {
