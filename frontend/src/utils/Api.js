@@ -31,7 +31,7 @@
   changeProfile({name, about}) {
    return fetch(this._baseUrl + `/users/me`, {
       method: "PATCH",
-      
+      credentials: 'include',
       headers: this._headers,
       
       body: JSON.stringify({
@@ -56,16 +56,16 @@
     
   }
 
-  setLike(_id) {
-    return fetch(this._baseUrl + `/cards/` + _id + `/likes/`, {
+  setLike(id) {
+    return fetch(this._baseUrl + `/cards/` + id + `/likes/`, {
       method: "PUT",
       credentials: 'include',
       headers: this._headers,
     }).then(this._handleResponse);
   }
    // Удалить лайк
-   removeLike(_id) {
-    return fetch(this._baseUrl + `/cards/` + _id + `/likes/`, {
+   removeLike(id) {
+    return fetch(this._baseUrl + `/cards/` + id + `/likes/`, {
       method: 'DELETE',
       credentials: 'include',
       headers: this._headers,

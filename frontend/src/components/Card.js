@@ -3,8 +3,8 @@ import { CurrentUserContext } from "../context/CurrentUserContext";
 
 function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const currentUser = useContext(CurrentUserContext);
-  console.log(currentUser.data._id, card.owner);
-  const isOwn = card.owner === currentUser._id;
+ 
+  const isOwn = card.owner === currentUser.data._id;
   const isLiked = card.likes.some((i) => i._id === currentUser.data._id);
     const cardLikeButtonClassName = `card__heart ${
     isLiked && "card__heart_activ"

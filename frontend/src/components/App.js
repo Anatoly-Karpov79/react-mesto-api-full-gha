@@ -44,8 +44,7 @@ function App() {
         .getUserInfo()
         .then((profileInfo) => {
           setCurrentUser(profileInfo);
-          console.log(profileInfo);
-        })
+          })
         .catch((err) => {
           console.log(err);
         });
@@ -74,29 +73,28 @@ function App() {
           setLoggedIn(true);
           setCurrentUser(res);
           navigate("/", { replace: true });
-          console.log(res.data.email)
           setEmail(res.data.email);
         })
         .catch((err) => {
           console.log(err);
-          console.log("efwefwfweffe")
-        });
+          });
     }
   }, [navigate]);
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
+    
     const isLiked = card.likes.some((i) => i._id === currentUser.data._id);
-    console.log('Текущий пользователь', currentUser.data._id)
+    console.log(card.likes)
 
     if (isLiked === false)
       api
-        .setLike(card._id, !isLiked)
+        .setLike(card._id, isLiked)
         
         .then((newCard) => {
           console.log(card._id);
           setCards((state) =>
-            state.map((i) => (i._id === card._id ? newCard : i))
+          state.map((c) => (c._id === card._id ? newCard : c))
           );
         })
         .catch((err) => {
@@ -210,13 +208,12 @@ function App() {
   }
 
   function handleLogin(password, email) {
-    console.log("нажали кнопку")
+   
     auth
       .authorize(email, password)
       
       .then((res) => {
-        console.log("Прошли авторизацию")
-        console.log(res)
+        
         if(res.token){
           
         setLoggedIn(true);
