@@ -33,7 +33,7 @@ module.exports.createCard = (req, res, next) => {
 };
 
 module.exports.deleteCardById = (req, res, next) => {
-  const { cardId } = req.params;
+  const cardId = req.params;
 
   Card.findById(cardId)
     .orFail(() => {
