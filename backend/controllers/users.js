@@ -57,7 +57,7 @@ module.exports.getUserById = (req, res, next) => {
         next(new NotFoundError('Неверный Id'));
         return;
       }
-      res.status(STATUS_OK).send({ data: user });
+      res.status(STATUS_OK).send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -79,7 +79,7 @@ module.exports.updateUser = (req, res, next) => {
       runValidators: true,
     },
   )
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     // если данные не записались, вернём ошибку
     .catch((err) => {
       if (err.name === 'ValidationError') {
