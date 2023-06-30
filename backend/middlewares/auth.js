@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
     next(new AuthError('Необходимо срочно авторизоваться'));
     return;
   }
-  const token = req.cookies.jwt;
+  const token = req.headers.replace('Bearer ', '');
 
   let payload;
 
@@ -23,4 +23,3 @@ module.exports = (req, res, next) => {
   req.user = payload;
   next();
 };
-
