@@ -3,7 +3,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Main from "./Main";
 import ImagePopup from "./ImagePopup";
-import { CurrentUserContext } from "../context/CurrentUserContext";
+import  CurrentUserContext  from "../context/CurrentUserContext";
 import { api } from "../utils/Api";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
@@ -71,7 +71,7 @@ function App() {
 
         .then((res) => {
           setLoggedIn(true);
-          setCurrentUser(res);
+          setCurrentUser(res.data);
           navigate("/", { replace: true });
           setEmail(res.data.email);
         })

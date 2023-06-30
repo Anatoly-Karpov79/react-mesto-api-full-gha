@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+console.log('Привет');
 console.log(process.env.NODE_ENV);
 
 const express = require('express');
