@@ -5,8 +5,7 @@ const AuthError = require('../errors/autherror');
 const { JWT_SECRET = 'dev-secret' } = process.env;
 
 module.exports = (req, res, next) => {
-  const { authorization } = req.headers;
-  if (!authorization || !authorization.startsWith('Bearer ')) {
+  if (!req.cookies) {
     next(new AuthError('Необходимо срочно авторизоваться'));
     return;
   }
