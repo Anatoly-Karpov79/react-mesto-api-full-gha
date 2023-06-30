@@ -16,6 +16,8 @@ const cors = require('./middlewares/cors');
 
 const { PORT = 3000 } = process.env;
 const app = express();
+console.log('Привет');
+console.log(process.env.NODE_ENV);
 
 app.use(bodyParser.json());
 app.use(cookieParser());

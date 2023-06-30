@@ -116,6 +116,8 @@ module.exports.updateUserAvatar = (req, res, next) => {
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   const { NODE_ENV, JWT_SECRET } = process.env;
+  console.log('Привет');
+  console.log(process.env.NODE_ENV);
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
