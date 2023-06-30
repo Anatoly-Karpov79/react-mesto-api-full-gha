@@ -33,19 +33,15 @@ module.exports.createCard = (req, res, next) => {
 };
 
 module.exports.deleteCardById = (req, res, next) => {
-  const cardId = req.params;
-
-  Card.findById(cardId)
+  Card.findById(req.params.cardId)
     .orFail(() => {
       next(new NotFoundError('Карточка не найдена.'));
     })
 
     .then((card) => {
       const owner = card.owner.toString();
-      console.log(owner);
-      console.log(card);
 
-      if (owner === req.user._id) {
+      if (owner === req.user._id.toString()) {
         Card.deleteOne(card)
           .then(() => {
             res.send(card);
