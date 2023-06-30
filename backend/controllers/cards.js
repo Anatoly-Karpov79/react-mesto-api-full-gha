@@ -42,6 +42,8 @@ module.exports.deleteCardById = (req, res, next) => {
 
     .then((card) => {
       const owner = card.owner.toString();
+      console.log(owner);
+      console.log(card);
 
       if (owner === req.user._id) {
         Card.deleteOne(card)

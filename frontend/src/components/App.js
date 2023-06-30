@@ -3,7 +3,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Main from "./Main";
 import ImagePopup from "./ImagePopup";
-import  CurrentUserContext  from "../context/CurrentUserContext";
+import  { CurrentUserContext }  from "../context/CurrentUserContext";
 import { api } from "../utils/Api";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
@@ -163,7 +163,7 @@ function App() {
     api
       .changeProfile(name, about)
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.data);
         closeAllPopups();
       })
       .catch((err) => {
@@ -176,7 +176,7 @@ function App() {
     api
       .changeAvatar(data)
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.data);
         closeAllPopups();
       })
       .catch((err) => {
