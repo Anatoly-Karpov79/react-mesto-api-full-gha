@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 
 const cardSchema = new mongoose.Schema({
-  likes: [{
-    type: mongoose.Schema.Types.ObjectId,
+  likes: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
     default: [],
-    ref: 'user',
-  }],
+  },
   name: { // у пользователя есть имя — опишем требования к имени в схеме:
     type: String, // имя — это строка
     required: true, // оно должно быть у каждого пользователя, так что имя — обязательное поле
