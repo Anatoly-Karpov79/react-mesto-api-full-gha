@@ -66,7 +66,7 @@ module.exports.likeCard = (req, res, next) => {
         next(new NotFoundError('Карточка не найдена.'));
         return;
       }
-      res.status(STATUS_OK).send({ data: card });
+      res.status(STATUS_OK).send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
