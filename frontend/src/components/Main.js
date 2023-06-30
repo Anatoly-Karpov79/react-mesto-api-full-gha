@@ -2,11 +2,11 @@ import React from "react";
 import { CurrentUserContext } from "../context/CurrentUserContext";
 import Card from "./Card";
 
-function Main({ cards, onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike, onCardDelete }) {
+function Main({ cards, onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike, onCardDelete, }) {
 
 
-  const currentUser = React.useContext(CurrentUserContext)
-  const { name, avatar, about } = currentUser.data;
+  const currentUser = React.useContext(CurrentUserContext).data
+  const { name, avatar, about } = currentUser;
 
 
 
@@ -45,17 +45,17 @@ function Main({ cards, onEditAvatar, onEditProfile, onAddPlace, onCardClick, onC
       </section>
 
       <section className="elements">
-        {cards.length > 0 && cards.map((card) => {
-          return (
+        {cards.map(card => (
+          
             <Card
-              key={card._id}
               card={card}
               onCardClick={onCardClick}
               onCardDelete={onCardDelete}
               onCardLike={onCardLike}
+              key={card._id}
             ></Card>
-          );
-        })}
+          
+        ))}
       </section>
     </>
   );

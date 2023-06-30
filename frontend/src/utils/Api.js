@@ -58,7 +58,7 @@
 
   setLike(id) {
     return fetch(this._baseUrl + `/cards/` + id + `/likes/`, {
-      method: "PUT",
+      method: 'PUT',
       credentials: 'include',
       headers: this._headers,
     }).then(this._handleResponse);
@@ -83,8 +83,8 @@
       .then(this._handleResponse);
   }
 
-  deleteCard(_cardId) {
-    return fetch(this._baseUrl + `/cards/` + _cardId, {
+  deleteCard(cardId) {
+    return fetch(this._baseUrl + `/cards/` + cardId, {
         method: "DELETE",
         credentials: 'include',
         headers: this._headers,
