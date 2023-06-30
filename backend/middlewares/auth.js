@@ -5,12 +5,12 @@ const AuthError = require('../errors/autherror');
 const { JWT_SECRET = 'dev-secret' } = process.env;
 
 module.exports = (req, res, next) => {
-  const { jwt } = req.cookies;
+  const { jwt } = req.cookies.jwt;
   if (!jwt) {
     next(new AuthError('Необходимо срочно авторизоваться'));
     return;
   }
- // const token = req.cookies.jwt;
+  // const token = req.cookies.jwt;
 
   let payload;
 
