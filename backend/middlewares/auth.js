@@ -24,3 +24,4 @@ module.exports = (req, res, next) => {
 
   next();
 };
+// авторизация на локале
