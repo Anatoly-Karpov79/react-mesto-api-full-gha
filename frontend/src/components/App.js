@@ -3,7 +3,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Main from "./Main";
 import ImagePopup from "./ImagePopup";
-import  { CurrentUserContext }  from "../context/CurrentUserContext";
+import { CurrentUserContext } from "../context/CurrentUserContext";
 import { api } from "../utils/Api";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
@@ -24,7 +24,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] =
@@ -36,7 +36,6 @@ function App() {
   const [checkToken, setCheckToken] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [info, setInfo] = useState({ image: "", text: "" });
-
 
   useEffect(() => {
     if (loggedIn) {
@@ -61,17 +60,13 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-
+    const jwt = localStorage.getItem("jwt");
     if (jwt) {
-
       setCheckToken(true);
       auth
-        .getContent()
-
+        .getContent(jwt)
         .then((res) => {
           setLoggedIn(true);
-          setCurrentUser(res.data);
           navigate("/", { replace: true });
           setEmail(res.data.email);
         })
@@ -83,28 +78,25 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-
-    const isLiked = card.likes.some((i) => i === currentUser._id);
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     if (isLiked === false)
       api
-        .setLike(card._id)
+        .setLike(card._id, !isLiked)
         .then((newCard) => {
           setCards((state) =>
-            state.map((c) => (c.id === card._id ? newCard : c)),
-            console.log()
+            state.map((c) => (c._id === card._id ? newCard : c))
           );
-
         })
         .catch((err) => {
           console.log(err);
         });
     else
       api
-        .removeLike(card._id)
+        .removeLike(card._id, !isLiked)
         .then((newCard) => {
           setCards((state) =>
-            state.map(c => c._id === card._id ? newCard : c)
+            state.map((c) => (c._id === card._id ? newCard : c))
           );
         })
         .catch((err) => {
@@ -115,10 +107,8 @@ function App() {
   function handleDeleteSubmit(card) {
     api
       .deleteCard(card._id)
-      
-      .then((newCard) => {
-        setCards((state) => state.filter(c => c._id !== card._id));
-        
+      .then(() => {
+        setCards((state) => state.filter((c) => c._id !== card._id));
         closeAllPopups();
       })
       .catch((err) => {
@@ -145,8 +135,6 @@ function App() {
 
   function handleCardClick(card) {
     setSelectedCard(card);
-    console.log(card);
-    console.log(currentUser);
   }
 
   function closeAllPopups() {
@@ -164,7 +152,7 @@ function App() {
     api
       .changeProfile(name, about)
       .then((res) => {
-        setCurrentUser(res.data);
+        setCurrentUser(res);
         closeAllPopups();
       })
       .catch((err) => {
@@ -177,7 +165,7 @@ function App() {
     api
       .changeAvatar(data)
       .then((res) => {
-        setCurrentUser(res.data);
+        setCurrentUser(res);
         closeAllPopups();
       })
       .catch((err) => {
@@ -190,7 +178,6 @@ function App() {
     setIsLoading(true);
     api
       .addCard(data)
-
       .then((res) => {
         setCards([res, ...cards]);
         closeAllPopups();
@@ -206,23 +193,13 @@ function App() {
   }
 
   function handleLogin(password, email) {
-
     auth
       .authorize(email, password)
-
       .then((res) => {
-
-        if (res.token) {
-
-          setLoggedIn(true);
-          localStorage.setItem('jwt', res.token);
-          navigate("/", { replace: true });
-        }
-
-
-      }
-
-      )
+        setLoggedIn(true);
+        localStorage.setItem("jwt", res.token);
+        navigate("/", { replace: true });
+      })
       .catch((err) => {
         setShowTooltip(true);
         chooseInfoTooltip({
@@ -256,7 +233,6 @@ function App() {
   function signOut() {
     localStorage.removeItem("jwt");
     navigate("/sign-up");
-    localStorage.removeItem("isLogged");
     setLoggedIn(false);
   }
 
@@ -281,7 +257,7 @@ function App() {
           exact
           path="/"
           element={
-            <ProtectedRoute loggedIn={loggedIn} checkToken={checkToken} >
+            <ProtectedRoute loggedIn={loggedIn} checkToken={checkToken}>
               <Main
                 component={Main}
                 onEditAvatar={handleEditAvatarClick}
@@ -328,7 +304,7 @@ function App() {
         />
 
         <Route
-          exact path="/*"
+         exact path="/*"
           element={loggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />}
         />
       </Routes>
