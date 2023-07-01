@@ -57,7 +57,7 @@ module.exports.getUserById = (req, res, next) => {
         next(new NotFoundError('Неверный Id'));
         return;
       }
-      res.status(STATUS_OK).send({ data: user });
+      res.status(STATUS_OK).send({ user });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
