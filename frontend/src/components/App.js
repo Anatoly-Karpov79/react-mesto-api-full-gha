@@ -91,7 +91,8 @@ function App() {
         .setLike(card._id)
         .then((newCard) => {
           setCards((state) =>
-            state.map((c) => (c.id === card._id ? newCard : c))
+            state.map((c) => (c.id === card._id ? newCard : c)),
+            console.log()
           );
 
         })
@@ -103,7 +104,7 @@ function App() {
         .removeLike(card._id)
         .then((newCard) => {
           setCards((state) =>
-            state.map((c) => (c.id === card._id ? newCard : c))
+            state.map(c => c._id === card._id ? newCard : c)
           );
         })
         .catch((err) => {
@@ -255,6 +256,7 @@ function App() {
   function signOut() {
     localStorage.removeItem("jwt");
     navigate("/sign-up");
+    localStorage.removeItem("isLogged");
     setLoggedIn(false);
   }
 
