@@ -33,7 +33,9 @@ module.exports.createCard = (req, res, next) => {
 };
 
 module.exports.deleteCardById = (req, res, next) => {
-  Card.findById(req.params.cardId)
+  const { cardId } = req.params;
+
+  Card.findById(cardId)
     .orFail(() => {
       next(new NotFoundError('Карточка не найдена.'));
     })
@@ -41,7 +43,7 @@ module.exports.deleteCardById = (req, res, next) => {
     .then((card) => {
       const owner = card.owner.toString();
 
-      if (owner === req.user._id.toString()) {
+      if (owner === req.user._id) {
         Card.deleteOne(card)
           .then(() => {
             res.send(card);
@@ -61,7 +63,6 @@ module.exports.likeCard = (req, res, next) => {
     { $addToSet: { likes: req.user._id } }, // добавить _id в массив, если его там нет
     { new: true },
   )
-    .then((card) => card.populate(['owner', 'likes']))
     .then((card) => {
       if (!card) {
         next(new NotFoundError('Карточка не найдена.'));
