@@ -9,12 +9,12 @@ module.exports = (req, res, next) => {
     next(new AuthError('Необходимо срочно авторизоваться'));
     return;
   }
-  const token = req.cookies.jwt;
+  //const token = req.cookies.jwt;
 
   let payload;
 
   try {
-    payload = jwt.verify(token, JWT_SECRET);
+    payload = jwt.verify(jwt, JWT_SECRET);
   } catch (err) {
     next(new AuthError('Необходимо авторизоваться'));
     return;
