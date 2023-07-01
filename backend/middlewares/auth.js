@@ -2,24 +2,25 @@ const jwt = require('jsonwebtoken');
 
 const AuthError = require('../errors/autherror');
 
-const { JWT_SECRET = 'dev-secret' } = process.env;
-
 module.exports = (req, res, next) => {
-  if (!req.cookies) {
-    next(new AuthError('Необходимо срочно авторизоваться'));
+  const { authorization } = req.cookies;
+
+  if (!authorization) {
+    next(new AuthError('Необходимо авторизоваться'));
     return;
   }
-  const token = res.cookies.jwt;
 
+  const token = authorization.replace('Bearer ', '');
   let payload;
 
   try {
-    payload = jwt.verify(token, JWT_SECRET);
+    payload = jwt.verify(token, 'super-strong-secret');
   } catch (err) {
     next(new AuthError('Необходимо авторизоваться'));
     return;
   }
 
   req.user = payload;
+
   next();
 };

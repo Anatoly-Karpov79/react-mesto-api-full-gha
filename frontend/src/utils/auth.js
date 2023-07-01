@@ -37,7 +37,6 @@ export const getContent = () => {
     credentials: 'include',
     headers: {
 
-      'Authorization' : `Bearer ${localStorage.getItem('jwt')}`,
       'Content-Type': 'application/json',
       'Access-Control-Allow-Credentials': true,
     },

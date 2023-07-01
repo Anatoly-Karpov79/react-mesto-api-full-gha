@@ -43,8 +43,8 @@ module.exports.createUser = (req, res, next) => {
 
 module.exports.getAllUsers = (req, res, next) => {
   User.find({})
-    .then((users) => {
-      res.status(STATUS_OK).send(users);
+    .then((user) => {
+      res.send({ data: user });
     })
     .catch(next);
 };
@@ -115,18 +115,11 @@ module.exports.updateUserAvatar = (req, res, next) => {
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
-  const { JWT_SECRET = 'dev-secret' } = process.env;
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
-      res.status(STATUS_OK)
-        .cookie('jwt', token, {
-          maxAge: 3600000,
-          httpOnly: true,
-          sameSite: 'None',
-          secure: true,
-        }).send({ token });
+      const token = jwt.sign({ _id: user._id }, 'super-strong-secret', { expiresIn: '7d' });
+      res.status(STATUS_OK).cookie('authorization', token, { maxAge: 3600000 * 24 * 7, httpOnly: true }).send({ message: 'Успешная авторизация' });
     })
     .catch(next);
 };
