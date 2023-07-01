@@ -28,7 +28,7 @@ export const authorize = (email, password) => {
     body: JSON.stringify({ email, password }), 
   }).then(checkResponse)
     .then((data) => {
-      localStorage.setItem('jwt', data._id)
+      localStorage.setItem('jwt5', data._id)
       return data;
     })
   
