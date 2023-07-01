@@ -42,7 +42,7 @@ export const getContent = () => {
     headers: {
 
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials': true,
+      
     },
   }).then((res) => checkResponse(res));
 };
