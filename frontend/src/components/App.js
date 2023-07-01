@@ -60,7 +60,7 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem('jwt1');
     if (jwt) {
       setCheckToken(true);
       auth
@@ -197,7 +197,7 @@ function App() {
       .authorize(email, password)
       .then((res) => {
         setLoggedIn(true);
-        localStorage.setItem('jwt', res.token);
+        localStorage.setItem('jwt2', res.token);
         navigate("/", { replace: true });
       })
       .catch((err) => {
