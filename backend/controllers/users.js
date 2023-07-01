@@ -132,7 +132,7 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.getUserInfo = (req, res, next) => {
-  const { _id } = req.user;
+  const { _id } = req.user._id;
 
   User.find({ _id })
     .then((user) => res.status(STATUS_OK).send({ data: user[0] }))
