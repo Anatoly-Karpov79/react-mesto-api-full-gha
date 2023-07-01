@@ -60,7 +60,7 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt1');
+    const jwt = localStorage.getItem('jwt');
     if (jwt) {
       setCheckToken(true);
       auth
