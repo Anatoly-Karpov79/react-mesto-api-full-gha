@@ -60,7 +60,7 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem('userId');
     if (jwt) {
       setCheckToken(true);
       auth
@@ -197,7 +197,7 @@ function App() {
       .authorize(email, password)
       .then((res) => {
         setLoggedIn(true);
-        localStorage.setItem("jwt", res.token);
+        localStorage.setItem('userId', res.token);
         navigate("/", { replace: true });
       })
       .catch((err) => {
@@ -231,7 +231,7 @@ function App() {
   }
 
   function signOut() {
-    localStorage.removeItem("jwt");
+    localStorage.removeItem('userId');
     navigate("/sign-up");
     setLoggedIn(false);
   }

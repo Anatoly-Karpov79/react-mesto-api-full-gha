@@ -100,8 +100,6 @@ export const api = new Api({
   
   headers: {
     
-    
-      'Authorization' : `Bearer ${localStorage.getItem('jwt')}`,
       'Content-Type': 'application/json',
       
        

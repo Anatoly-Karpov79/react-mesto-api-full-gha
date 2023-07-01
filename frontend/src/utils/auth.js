@@ -26,7 +26,11 @@ export const authorize = (email, password) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }), 
-  }).then(checkResponse);
+  }).then(checkResponse)
+    .then((data) => {
+      localStorage.setItem('userId', data._id)
+      return data;
+    })
   
 };
 
