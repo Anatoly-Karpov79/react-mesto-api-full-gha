@@ -197,7 +197,7 @@ function App() {
       .authorize(email, password)
       .then((res) => {
         setLoggedIn(true);
-        localStorage.setItem('userId', res._id);
+        localStorage.setItem('jwt', res._id);
         console.log(res)
         navigate("/", { replace: true });
       })

@@ -29,6 +29,7 @@ export const authorize = (email, password) => {
   }).then(checkResponse)
     .then((data) => {
       localStorage.setItem('jwt', data)
+      console.log(data)
       return data;
     })
   
