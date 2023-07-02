@@ -4,7 +4,6 @@ import Card from "./Card";
 
 function Main({ cards, onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike, onCardDelete, }) {
 
-
   const currentUser = React.useContext(CurrentUserContext)
   const { name, avatar, about } = currentUser;
 

@@ -41,9 +41,8 @@ function App() {
     if (loggedIn) {
       api
         .getUserInfo()
-        .then((profileInfo) => {
-          setCurrentUser(profileInfo);
-          console.log(profileInfo)
+        .then((res) => {
+          setCurrentUser(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -64,15 +63,13 @@ function App() {
     const jwt = localStorage.getItem('userId');
     if (jwt) {
       setCheckToken(true);
-      console.log(jwt)
-      auth
+            auth
         .getContent()
         .then((res) => {
           setLoggedIn(true);
           navigate("/", { replace: true });
           setEmail(res.data.email);
-          console.log(res)
-        })
+                  })
         .catch((err) => {
           console.log(err);
         });
@@ -81,14 +78,14 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     if (isLiked === false)
       api
-        .setLike(card._id, !isLiked)
+        .setLike(card._id)
         .then((newCard) => {
           setCards((state) =>
-            state.map((c) => (c._id === card._id ? newCard : c))
+            state.map((c) => c._id === card._id ? newCard.data : c)
           );
         })
         .catch((err) => {
@@ -96,10 +93,10 @@ function App() {
         });
     else
       api
-        .removeLike(card._id, !isLiked)
+        .removeLike(card._id)
         .then((newCard) => {
-          setCards((state) =>
-            state.map((c) => (c._id === card._id ? newCard : c))
+          setCards((state) => state.map((c) => c._id === card._id ? newCard.data : c)
+
           );
         })
         .catch((err) => {
@@ -155,7 +152,7 @@ function App() {
     api
       .changeProfile(name, about)
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.data);
         closeAllPopups();
       })
       .catch((err) => {
@@ -168,7 +165,7 @@ function App() {
     api
       .changeAvatar(data)
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.data);
         closeAllPopups();
       })
       .catch((err) => {
@@ -182,7 +179,7 @@ function App() {
     api
       .addCard(data)
       .then((res) => {
-        setCards([res, ...cards]);
+        setCards([...cards, res]);
         closeAllPopups();
       })
       .catch((err) => {
@@ -200,9 +197,8 @@ function App() {
       .authorize(email, password)
       .then((res) => {
         setLoggedIn(true);
+        setCurrentUser(res);
         localStorage.setItem('userId', res._id);
-        console.log('userId', res._id)
-        console.log(res)
         navigate("/", { replace: true });
       })
       .catch((err) => {
@@ -309,7 +305,7 @@ function App() {
         />
 
         <Route
-         exact path="/*"
+          exact path="/*"
           element={loggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />}
         />
       </Routes>

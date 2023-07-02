@@ -29,7 +29,7 @@ export const authorize = (email, password) => {
   }).then(checkResponse)
     .then((data) => {
       localStorage.setItem('userId', data._id)
-      console.log(data._id)
+      console.log(data)
       return data;
     })
   
