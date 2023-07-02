@@ -28,8 +28,8 @@ export const authorize = (email, password) => {
     body: JSON.stringify({ email, password }), 
   }).then(checkResponse)
     .then((data) => {
-      localStorage.setItem('jwt', data)
-      console.log(data)
+      localStorage.setItem('userId', data._id)
+      console.log(data._id)
       return data;
     })
   
@@ -40,11 +40,7 @@ export const getContent = () => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     credentials: 'include',
-    headers: {
-      'Authorization' : `Bearer ${localStorage.getItem('jwt')}`,
-      'Content-Type': 'application/json',
-      
-    },
+    
   }).then((res) => checkResponse(res));
 };
 

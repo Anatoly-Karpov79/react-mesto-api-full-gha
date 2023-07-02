@@ -61,11 +61,12 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem('userId');
     if (jwt) {
       setCheckToken(true);
+      console.log(jwt)
       auth
-        .getContent(jwt)
+        .getContent()
         .then((res) => {
           setLoggedIn(true);
           navigate("/", { replace: true });
@@ -199,8 +200,8 @@ function App() {
       .authorize(email, password)
       .then((res) => {
         setLoggedIn(true);
-        localStorage.setItem('jwt', res._id);
-        console.log('jwt', res._id)
+        localStorage.setItem('userId', res._id);
+        console.log('userId', res._id)
         console.log(res)
         navigate("/", { replace: true });
       })
@@ -235,7 +236,7 @@ function App() {
   }
 
   function signOut() {
-    localStorage.removeItem('jwt');
+    localStorage.removeItem('userId');
     navigate("/sign-up");
     setLoggedIn(false);
   }
