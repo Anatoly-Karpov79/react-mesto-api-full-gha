@@ -43,6 +43,7 @@ function App() {
         .getUserInfo()
         .then((profileInfo) => {
           setCurrentUser(profileInfo);
+          console.log(profileInfo)
         })
         .catch((err) => {
           console.log(err);
@@ -69,6 +70,7 @@ function App() {
           setLoggedIn(true);
           navigate("/", { replace: true });
           setEmail(res.data.email);
+          console.log(res)
         })
         .catch((err) => {
           console.log(err);
@@ -198,6 +200,7 @@ function App() {
       .then((res) => {
         setLoggedIn(true);
         localStorage.setItem('jwt', res._id);
+        console.log('jwt', res._id)
         console.log(res)
         navigate("/", { replace: true });
       })
