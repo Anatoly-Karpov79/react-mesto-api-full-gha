@@ -18,10 +18,17 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors);
-// ({ origin: ['http://localhost:3000'], credentials: true })
+
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
   useNewUrlParser: true,
 });
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.use(requestLogger);
 app.use(routerUsers);
 app.use(routerCards);
@@ -33,11 +40,7 @@ app.use('/*', (req, res, next) => {
 app.use(errorLogger);
 app.use(errors());
 
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
+
 
 app.use((err, req, res, next) => {
   // если у ошибки нет статуса, выставляем 500

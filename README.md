@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 84.201.179.52
 
-Frontend https://...
+Frontend https://akarpov.mesto.nomoredomains.rocks
 
-Backend https://...
+Backend https://karpov.mesto.nomoredomains.rocks
