@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес IP 84.201.179.52
+IP-адрес IP <84.201.179.52>
 
 Frontend https://akarpov.mesto.nomoredomains.rocks
 
