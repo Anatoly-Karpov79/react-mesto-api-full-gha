@@ -27,7 +27,7 @@ module.exports.createUser = (req, res, next) => {
       const userPasswordLess = user.toObject();
       delete userPasswordLess.password;
 
-      res.status(STATUS_OK).send(userPasswordLess);
+      res.status(201).send(userPasswordLess);
     })
     // если данные не записались, вернём ошибку
     .catch((err) => {
