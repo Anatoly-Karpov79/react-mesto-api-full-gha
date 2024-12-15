@@ -96,7 +96,7 @@
 
 export const api = new Api({
       
-  baseUrl: `https://karpov.mesto.nomoredomains.rocks`,
+  baseUrl: `http://84.252.142.182`,
   
   headers: {
     
