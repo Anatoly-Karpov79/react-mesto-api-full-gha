@@ -14,3 +14,6 @@ IP-адрес IP <84.201.179.52>
 Frontend https://akarpov.mesto.nomoredomains.rocks
 
 Backend https://karpov.mesto.nomoredomains.rocks
+
+Проверка связи
+
