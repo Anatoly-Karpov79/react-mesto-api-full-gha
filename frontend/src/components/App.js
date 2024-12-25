@@ -43,6 +43,7 @@ function App() {
         .getUserInfo()
         .then((res) => {
           setCurrentUser(res.data);
+          console.log(res)
         })
         .catch((err) => {
           console.log(err);
@@ -60,9 +61,12 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    const jwt = localStorage.getItem('userId');
+    const jwt = localStorage.getItem('token');
     
     if (jwt) {
+      console.log("jkhjhgjhhgfhghg")
+      console.log(jwt)
+
       setCheckToken(true);
             auth
         .getContent()
@@ -199,7 +203,9 @@ function App() {
       .then((res) => {
         setLoggedIn(true);
         setCurrentUser(res);
-        localStorage.setItem('userId', res._id);
+        console.log(res)
+        localStorage.setItem('token', res.token);
+        console.log(localStorage.getItem('token'))
         navigate("/", { replace: true });
       })
       .catch((err) => {

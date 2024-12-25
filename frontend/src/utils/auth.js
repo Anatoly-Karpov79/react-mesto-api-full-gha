@@ -1,4 +1,4 @@
-export const BASE_URL = "https://karpov.mesto.nomoredomains.rocks";
+export const BASE_URL = "http://84.252.142.182";
 
 function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`);
@@ -22,34 +22,42 @@ export const authorize = (email, password) => {
     credentials: 'include',
     headers: {
 
-      //   Accept: "application/json",
+         Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
   }).then(checkResponse)
     .then((data) => {
       localStorage.setItem('userId', data._id)
+      console.log(localStorage.getItem('userId'))
+      console.log(localStorage.getItem('token'))
       return data;
     })
 
 };
 
-export const getContent = () => {
+export const getContent = (token) => {
 
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     credentials: 'include',
+    headers: {
+           "Accept": "application/json",
+           "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`,
+         },
+        
 
   }).then((res) => checkResponse(res));
 };
 
-//export const checkToken = (token) => {
- // return fetch(`${BASE_URL}/users/me`, {
- //   method: "GET",
- //   headers: {
- //     "Accept": "application/json",
- //     "Content-Type": "application/json",
- //     'Authorization': `Bearer ${token}`,
- //   },
- // }).then(checkResponse);
-//};
+export const checkToken = (token) => {
+ return fetch(`${BASE_URL}/users/me`, {
+   method: "GET",
+   headers: {
+     "Accept": "application/json",
+     "Content-Type": "application/json",
+     'Authorization': `Bearer ${token}`,
+   },
+ }).then(checkResponse);
+};

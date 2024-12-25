@@ -17,14 +17,14 @@
     return fetch(this._baseUrl + `/users/me`, { 
       method: "GET",
       credentials: 'include',
-    headers: this._headers,
+     headers: this._headers,
     }).then(this._handleResponse);
   }
 
   getInitialCards() {
     return fetch(this._baseUrl + "/cards", {
       credentials: 'include',
-      headers: this._headers,
+       headers: this._headers,
     }).then(this._handleResponse);
   }
 
@@ -96,12 +96,12 @@
 
 export const api = new Api({
       
-  baseUrl: `https://karpov.mesto.nomoredomains.rocks`,
+  baseUrl: `http://84.252.142.182`,
   
   headers: {
     
       'Content-Type': 'application/json',
-      'Authorization' : `Bearer ${localStorage.getItem('jwt')}`
+      'Authorization' : `Bearer ${localStorage.getItem('token')}`
        
   },
   
