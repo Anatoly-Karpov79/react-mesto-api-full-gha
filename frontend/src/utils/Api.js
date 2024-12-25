@@ -99,7 +99,7 @@ export const api = new Api({
   baseUrl: `http://84.252.142.182`,
   
   headers: {
-    
+    'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization' : `Bearer ${localStorage.getItem('token')}`
        

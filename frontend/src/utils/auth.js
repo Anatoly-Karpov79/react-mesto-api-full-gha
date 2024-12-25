@@ -24,11 +24,12 @@ export const authorize = (email, password) => {
 
          Accept: "application/json",
       "Content-Type": "application/json",
+      // 'Authorization' : `Bearer ${localStorage.getItem('token')}`
     },
     body: JSON.stringify({ email, password }),
   }).then(checkResponse)
     .then((data) => {
-      localStorage.setItem('userId', data._id)
+      localStorage.setItem('token', data.token)
       console.log(localStorage.getItem('userId'))
       console.log(localStorage.getItem('token'))
       return data;
@@ -40,24 +41,24 @@ export const getContent = (token) => {
 
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
-    credentials: 'include',
+    // credentials: 'include',
     headers: {
            "Accept": "application/json",
            "Content-Type": "application/json",
-          'Authorization': `Bearer ${token}`,
+           'Authorization': `Bearer ${token}`,
          },
         
 
   }).then((res) => checkResponse(res));
 };
 
-export const checkToken = (token) => {
- return fetch(`${BASE_URL}/users/me`, {
-   method: "GET",
-   headers: {
-     "Accept": "application/json",
-     "Content-Type": "application/json",
-     'Authorization': `Bearer ${token}`,
-   },
- }).then(checkResponse);
-};
+// export const checkToken = (token) => {
+//  return fetch(`${BASE_URL}/users/me`, {
+//    method: "GET",
+//    headers: {
+//      "Accept": "application/json",
+//      "Content-Type": "application/json",
+//      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+//    },
+//  }).then(checkResponse);
+// };

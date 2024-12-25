@@ -64,12 +64,12 @@ function App() {
     const jwt = localStorage.getItem('token');
     
     if (jwt) {
-      console.log("jkhjhgjhhgfhghg")
-      console.log(jwt)
+      console.log("Проверили jwt")
+      // console.log(jwt)
 
       setCheckToken(true);
             auth
-        .getContent()
+        .getContent(jwt)
         .then((res) => {
           setLoggedIn(true);
           navigate("/", { replace: true });
@@ -212,7 +212,7 @@ function App() {
         setShowTooltip(true);
         chooseInfoTooltip({
           image: error,
-          text: "Что-то пошло не так! Попробуйте еще раз!",
+          text: "Что-то пошло не так! Попробуйте еще раз! hendleLogin",
         });
       });
   }
@@ -239,7 +239,7 @@ function App() {
   }
 
   function signOut() {
-    localStorage.removeItem('userId');
+    localStorage.removeItem('token');
     navigate("/sign-up");
     setLoggedIn(false);
   }
